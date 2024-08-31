@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordRang</title>
+    <link rel="StyleSheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <div class="greeting-container">
+        <h1 id="welcome-text" class="typewriter">Welcome to WordRang!</h1>
+        <div id="greeting">
+            <input type="text" id="username" placeholder="Enter your name">
+            <input type="button" class="button-73" value="Start Game" onclick="startGame()">
+        </div>
+    </div>
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- Instructions Modal -->
+    <div id="instructions-modal" class="modal">
+        <div class="modal-content">
+            <h2>How to Play WordRang</h2>
+            <p>Welcome to WordRang! Here's how to play the game and enjoy its features:</p>
+            <h3>Starting the Game</h3>
+            <ul>
+                <li><strong>Enter Your Name:</strong> Begin by entering your name in the provided text box on the welcome screen. Click the "Start Game" button to begin.</li>
+                <li><strong>Start Game Without Name:</strong> If you try to start the game without entering your name, a popup will remind you to enter it before proceeding.</li>
+            </ul>
+            <h3>Playing the Game</h3>
+            <ul>
+                <li><strong>Scramble a Word:</strong> Once the game starts, click "Next Word" to generate a scrambled word from the dictionary.</li>
+                <li><strong>Guess the Word:</strong> Type your guess and click "Submit Guess" to check if your guess is correct.</li>
+                <li><strong>Receiving Feedback:</strong> The game will tell you whether your guess was correct or incorrect.</li>
+                <li><strong>Moving to the Next Word:</strong> Click "Next Word" to proceed to the next scrambled word and continue the game.</li>
+            </ul>
+            <h3>Voice Assistance</h3>
+            <p>Click on the speaker icon next to the scrambled word to hear the word pronounced.</p>
+            <h3>Scoring and Progress</h3>
+            <ul>
+                <li><strong>Score Tracking:</strong> Your current score is displayed at the bottom of the game screen.</li>
+                <li><strong>Word Count:</strong> The game also tracks how many words you've played.</li>
+            </ul>
+            <h3>Exiting the Game</h3>
+            <p>Click the "Exit Game" button to exit and reset the game.</p>
+            <button id="ok-btn" onclick="closeInstructions()">OK</button>
+        </div>
+    </div>
+
+    <div class="container" id="game-container">
+        <div id="game">
+            <h2 id="hello-message"></h2>
+            <h3>Hint: Word Starts with Capital Letter</h3>
+            <div id="scrambled">Press "Next" to scramble a word.</div>
+            <!-- Speaker icon for pronunciation -->
+            <img src="{{ url_for('static', filename='image/speaker.png') }}" alt="Speaker Icon" id="speaker-icon" onclick="pronounceWord()">
+            <input type="text" id="guess" placeholder="Your guess" required>
+            <input type="button" class="btn" value="Submit Guess" onclick="submitGuess()">
+            <input type="button" value="Next Word" onclick="nextWord()" style="display: none;">
+            <div id="score">Score: 0</div>
+            <div id="word-count">Words Played: 0</div>
+            <input type="button" class="exit" value="Exit Game" onclick="exitGame()">
+        </div>
+    </div>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <p id="popup-message"></p>
+             <!-- Image for correct answer GIF -->
+            <img id="correct-gif" src="{{ url_for('static', filename='image/correct.gif') }}" alt="Correct Answer GIF" style="display: none; width: 100%; height: auto; margin: 10px 0;">
+            <img id="incorrect-png" src="{{ url_for('static', filename='image/incorrect.png') }}" alt="Incorrect Answer GIF" style="display: none; width: 100%; height: auto; margin: 10px 0;"><button onclick="closePopup()">OK</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+
+</body>
+</html>
